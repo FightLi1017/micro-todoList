@@ -15,7 +15,7 @@ const (
 	PasswordCost = 18
 )
 
-func (user *User) setPassword(password string) error {
+func (user User) SetPassword(password string) error {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), PasswordCost)
 	if err != nil {
 		return err
@@ -24,7 +24,7 @@ func (user *User) setPassword(password string) error {
 	return nil
 }
 
-func (user *User) checkPassword(password string) bool {
+func (user User) CheckPassword(password string) bool {
 	error := bcrypt.CompareHashAndPassword([]byte(user.PasswordDigest), []byte(password))
 	return error == nil
 }
